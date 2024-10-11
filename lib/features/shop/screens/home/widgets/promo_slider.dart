@@ -12,6 +12,9 @@ class MMPromoSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeControler());
+    final screenWidth = MediaQuery.of(context).size.width;
+    final sliderHeight = screenWidth * 0.5;
+    final constainedHeight = sliderHeight.clamp(150.0, 350.0);
 
     return Column(
       children: [
@@ -21,8 +24,8 @@ class MMPromoSlider extends StatelessWidget {
             onPageChanged: (index, _) => controller.updatePageIndicator(index),
             aspectRatio: 2,
             autoPlay: true,
-            height: 150,
-            autoPlayInterval: const Duration(seconds: 3),
+            height: constainedHeight,
+            autoPlayInterval: const Duration(seconds: 5),
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
             autoPlayCurve: Curves.fastOutSlowIn,
           ),
@@ -31,6 +34,7 @@ class MMPromoSlider extends StatelessWidget {
                     scale: 0.98, // Adjust the scale factor to fit your needs
                     child: MMRoudedImage(
                         width: double.infinity,
+                        height: constainedHeight,
                         applyImageRadius: true,
                         imageUrl: url),
                   ))

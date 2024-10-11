@@ -15,18 +15,21 @@ class MMGridLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final crossAxisCount = screenWidth < 678 ? 2 : 3;
+
     return GridView.builder(
       itemCount: itemCount,
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: crossAxisCount,
         mainAxisExtent: mainAxisExtent,
         mainAxisSpacing: MMSizes.gridViewSpacing,
         crossAxisSpacing: MMSizes.gridViewSpacing,
-      ), // SliverGridDelegateWithFixedCrossAxisCount
+      ),
       itemBuilder: itemBuilder,
-    ); // GridView.builder
+    );
   }
 }

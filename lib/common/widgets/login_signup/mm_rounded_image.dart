@@ -11,7 +11,7 @@ class MMRoudedImage extends StatelessWidget {
       this.height,
       this.applyImageRadius = true,
       required this.imageUrl,
-      this.fit = BoxFit.contain,
+      this.fit = BoxFit.cover,
       this.backgroundColor,
       this.isNetworkImage = false,
       this.borderRdius = MMSizes.md});
@@ -30,25 +30,27 @@ class MMRoudedImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: onPressed,
-        child: Container(
-          width: width,
-          height: height,
-          padding: padding,
-          decoration: BoxDecoration(
-              border: border,
-              color: backgroundColor,
-              borderRadius: BorderRadius.circular(borderRdius)),
-          child: ClipRRect(
-            borderRadius: applyImageRadius
-                ? BorderRadius.circular(borderRdius)
-                : BorderRadius.zero,
-            child: Image(
-                fit: fit,
-                image: isNetworkImage
-                    ? NetworkImage(imageUrl)
-                    : AssetImage(imageUrl) as ImageProvider),
+      onTap: onPressed,
+      child: Container(
+        height: height,
+        padding: padding,
+        decoration: BoxDecoration(
+          border: border,
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(borderRdius),
+        ),
+        child: ClipRRect(
+          borderRadius: applyImageRadius
+              ? BorderRadius.circular(borderRdius)
+              : BorderRadius.zero,
+          child: Image(
+            fit: fit,
+            image: isNetworkImage
+                ? NetworkImage(imageUrl)
+                : AssetImage(imageUrl) as ImageProvider,
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
